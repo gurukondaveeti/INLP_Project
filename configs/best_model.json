@@ -1,0 +1,11 @@
+{
+  "epochs": 50,
+  "batch_size": 256,
+  "lr": 0.0005,
+  "weight_decay": 0.0005,
+  "perp_dropout": 0.35,
+  "perp_grad_scale": 0.15,
+  "label_smoothing": 0.08,
+  "patience": 10,
+  "output_dir": "experiments/fusion_output_3branch_v2"
+}

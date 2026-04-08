@@ -51,15 +51,15 @@ def parse_args():
     p = argparse.ArgumentParser(description="Train Fusion MLP for MGT Detection")
 
     # ── Data Paths ─────────────────────────────────────────────
-    p.add_argument("--stylo_pkl", type=str, default="../data/features/extracted_features_cache.pkl",
+    p.add_argument("--stylo_pkl", type=str, default="data/features/extracted_features_cache.pkl",
                    help="Path to Afzal's stylometric cache pkl")
-    p.add_argument("--train_perp", type=str, default="../data/features/train_perplexity_features.pkl",
+    p.add_argument("--train_perp", type=str, default="data/features/train_perplexity_features.pkl",
                    help="Path to Vinay's train perplexity pkl")
-    p.add_argument("--val_perp", type=str, default="../data/features/dev_perplexity_features.pkl",
+    p.add_argument("--val_perp", type=str, default="data/features/dev_perplexity_features.pkl",
                    help="Path to Vinay's val/dev perplexity pkl")
-    p.add_argument("--test_perp", type=str, default="../data/features/test_perplexity_features.pkl",
+    p.add_argument("--test_perp", type=str, default="data/features/test_perplexity_features.pkl",
                    help="Path to Vinay's test perplexity pkl")
-    p.add_argument("--semantic_dir", type=str, default="../data/features",
+    p.add_argument("--semantic_dir", type=str, default="data/features",
                    help="Directory containing semantic_{train,val,test}.pkl files")
 
     # ── Model Architecture ─────────────────────────────────────
@@ -97,10 +97,27 @@ def parse_args():
     p.add_argument("--seed", type=int, default=42)
 
     # ── Output ─────────────────────────────────────────────────
-    p.add_argument("--output_dir", type=str, default="../experiments/fusion_output",
+    p.add_argument("--output_dir", type=str, default="experiments/fusion_output",
                    help="Directory for saving model, plots, predictions")
 
-    return p.parse_args()
+    # ── Config ─────────────────────────────────────────────────
+    p.add_argument("--config", type=str, default=None,
+                   help="Path to JSON config file to override defaults")
+
+    # Parse known args first to check for config
+    args, remaining = p.parse_known_args()
+    
+    if args.config:
+        try:
+            with open(args.config, 'r') as f:
+                config_dict = json.load(f)
+            # Set JSON contents as standard defaults allowing CLI overrides
+            p.set_defaults(**config_dict)
+        except Exception as e:
+            print(f"Error loading config file {args.config}: {e}")
+            
+    # Final parse to incorporate CLI args over config defaults
+    return p.parse_args(remaining)
 
 
 # ══════════════════════════════════════════════════════════════
