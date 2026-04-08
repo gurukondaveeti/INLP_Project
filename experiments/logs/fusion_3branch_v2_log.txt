@@ -1,0 +1,106 @@
+﻿
+============================================================
+  MULTIMODAL FUSION MLP ΓÇö MGT DETECTION
+  Device: cpu
+  Time:   2026-04-08 01:40:30
+============================================================
+
+≡ƒôé Phase 1: Loading and aligning data...
+  [train] Stylometric: (119757, 11)  columns=['burstiness', 'sentence_length_deviation', 'dependency_tree_depth', 'hapax_legomena_ratio', 'clause_density', 'verb_gap_deviation', 'lexical_density', 'stopword_gradient', 'content_unique_ratio', 'subject_verb_distance', 'function_word_adjacency']
+  [train] Perplexity:  (119757, 12)
+  [train] Semantic:    (119757, 64)  (from semantic_train.pkl)
+
+  ≡ƒöº Fitting per-branch StandardScalers on training data...
+  [train] Stylometric: (119757, 11)  columns=['burstiness', 'sentence_length_deviation', 'dependency_tree_depth', 'hapax_legomena_ratio', 'clause_density', 'verb_gap_deviation', 'lexical_density', 'stopword_gradient', 'content_unique_ratio', 'subject_verb_distance', 'function_word_adjacency']
+  [train] Perplexity:  (119757, 12)
+  [train] Semantic:    (119757, 64)  (from semantic_train.pkl)
+  [val] Stylometric: (5000, 11)  columns=['burstiness', 'sentence_length_deviation', 'dependency_tree_depth', 'hapax_legomena_ratio', 'clause_density', 'verb_gap_deviation', 'lexical_density', 'stopword_gradient', 'content_unique_ratio', 'subject_verb_distance', 'function_word_adjacency']
+  [val] Perplexity:  (5000, 12)
+  [val] Semantic:    (5000, 64)  (from semantic_validation.pkl)
+  [test] Stylometric: (34272, 11)  columns=['burstiness', 'sentence_length_deviation', 'dependency_tree_depth', 'hapax_legomena_ratio', 'clause_density', 'verb_gap_deviation', 'lexical_density', 'stopword_gradient', 'content_unique_ratio', 'subject_verb_distance', 'function_word_adjacency']
+  [test] Perplexity:  (34272, 12)
+  [test] Semantic:    (34272, 64)  (from semantic_test.pkl)
+
+  Γ£à Train: 119,757  Val: 5,000  Test: 34,272
+  Γ£à Dims ΓÇö Stylo: 11, Perp: 12, Sem: 64
+  Γ£à Class balance ΓÇö Neg(human): 63,351  Pos(machine): 56,406
+     pos_weight = 1.1231
+
+≡ƒÅù∩╕Å  Phase 2: Building model...
+  Total params:     105,139
+  Trainable params: 105,139
+  Gate values:      {'gate_stylo': 0.5, 'gate_perp': 0.12000000476837158, 'gate_sem': 0.5}
+
+≡ƒÜÇ Phase 3: Training for up to 50 epochs...
+   Batch size: 256  |  LR: 0.0005  |  WD: 0.0005
+   Scheduler: onecycle  |  Patience: 10
+   Anti-overshadowing: perp_dropout=0.35, perp_grad_scale=0.15, perp_gate_init=0.12
+   Loss weights: primary=0.7, aux=0.30000000000000004
+
+  Epoch 01/50 Γöé Loss: 0.7301/0.8093 Γöé F1: 0.6015/0.4674 Γöé Acc: 0.6038/0.4982 Γöé Gates: S=0.503 P=0.122 E=0.497 Γöé LR: 6.59e-05 Γöé 6.8s
+    Γ£¿ New best! Val F1 = 0.4674  (saved)
+  Epoch 02/50 Γöé Loss: 0.5953/0.8358 Γöé F1: 0.7427/0.5393 Γöé Acc: 0.7435/0.5750 Γöé Gates: S=0.503 P=0.129 E=0.490 Γöé LR: 1.86e-04 Γöé 7.7s
+    Γ£¿ New best! Val F1 = 0.5393  (saved)
+  Epoch 03/50 Γöé Loss: 0.5134/0.7960 Γöé F1: 0.8083/0.5900 Γöé Acc: 0.8092/0.6212 Γöé Gates: S=0.496 P=0.143 E=0.479 Γöé LR: 3.34e-04 Γöé 10.0s
+    Γ£¿ New best! Val F1 = 0.5900  (saved)
+  Epoch 04/50 Γöé Loss: 0.4687/0.7690 Γöé F1: 0.8403/0.6384 Γöé Acc: 0.8411/0.6574 Γöé Gates: S=0.494 P=0.154 E=0.468 Γöé LR: 4.54e-04 Γöé 9.9s
+    Γ£¿ New best! Val F1 = 0.6384  (saved)
+  Epoch 05/50 Γöé Loss: 0.4449/0.7678 Γöé F1: 0.8554/0.6403 Γöé Acc: 0.8561/0.6602 Γöé Gates: S=0.491 P=0.162 E=0.461 Γöé LR: 5.00e-04 Γöé 10.0s
+    Γ£¿ New best! Val F1 = 0.6403  (saved)
+  Epoch 06/50 Γöé Loss: 0.4305/0.7587 Γöé F1: 0.8635/0.6589 Γöé Acc: 0.8642/0.6754 Γöé Gates: S=0.487 P=0.170 E=0.455 Γöé LR: 4.99e-04 Γöé 10.3s
+    Γ£¿ New best! Val F1 = 0.6589  (saved)
+  Epoch 07/50 Γöé Loss: 0.4188/0.7274 Γöé F1: 0.8711/0.6789 Γöé Acc: 0.8717/0.6904 Γöé Gates: S=0.484 P=0.176 E=0.451 Γöé LR: 4.98e-04 Γöé 9.8s
+    Γ£¿ New best! Val F1 = 0.6789  (saved)
+  Epoch 08/50 Γöé Loss: 0.4118/0.7627 Γöé F1: 0.8763/0.6598 Γöé Acc: 0.8768/0.6772 Γöé Gates: S=0.478 P=0.182 E=0.450 Γöé LR: 4.95e-04 Γöé 10.0s
+  Epoch 09/50 Γöé Loss: 0.4073/0.7598 Γöé F1: 0.8782/0.6474 Γöé Acc: 0.8788/0.6690 Γöé Gates: S=0.475 P=0.186 E=0.449 Γöé LR: 4.90e-04 Γöé 9.6s
+  Epoch 10/50 Γöé Loss: 0.4006/0.7801 Γöé F1: 0.8823/0.6544 Γöé Acc: 0.8829/0.6742 Γöé Gates: S=0.472 P=0.192 E=0.445 Γöé LR: 4.85e-04 Γöé 9.5s
+  Epoch 11/50 Γöé Loss: 0.3975/0.8359 Γöé F1: 0.8842/0.6226 Γöé Acc: 0.8847/0.6508 Γöé Gates: S=0.468 P=0.196 E=0.445 Γöé LR: 4.78e-04 Γöé 9.5s
+  Epoch 12/50 Γöé Loss: 0.3932/0.7823 Γöé F1: 0.8869/0.6543 Γöé Acc: 0.8874/0.6736 Γöé Gates: S=0.464 P=0.199 E=0.446 Γöé LR: 4.71e-04 Γöé 9.6s
+  Epoch 13/50 Γöé Loss: 0.3902/0.7608 Γöé F1: 0.8891/0.6569 Γöé Acc: 0.8896/0.6762 Γöé Gates: S=0.462 P=0.203 E=0.444 Γöé LR: 4.62e-04 Γöé 9.6s
+  Epoch 14/50 Γöé Loss: 0.3882/0.7736 Γöé F1: 0.8906/0.6607 Γöé Acc: 0.8910/0.6778 Γöé Gates: S=0.459 P=0.206 E=0.442 Γöé LR: 4.52e-04 Γöé 10.0s
+  Epoch 15/50 Γöé Loss: 0.3849/0.8026 Γöé F1: 0.8918/0.6504 Γöé Acc: 0.8923/0.6720 Γöé Gates: S=0.456 P=0.209 E=0.444 Γöé LR: 4.41e-04 Γöé 10.4s
+  Epoch 16/50 Γöé Loss: 0.3836/0.8006 Γöé F1: 0.8930/0.6599 Γöé Acc: 0.8934/0.6774 Γöé Gates: S=0.454 P=0.211 E=0.443 Γöé LR: 4.30e-04 Γöé 9.6s
+  Epoch 17/50 Γöé Loss: 0.3819/0.7858 Γöé F1: 0.8944/0.6569 Γöé Acc: 0.8949/0.6756 Γöé Gates: S=0.452 P=0.213 E=0.443 Γöé LR: 4.17e-04 Γöé 9.8s
+
+  ΓÅ╣∩╕Å  Early stopping at epoch 17 (no improvement for 10 epochs)
+
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  Best epoch: 7  |  Best Val F1: 0.6789
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+≡ƒôè Phase 4: Final evaluation on test set...
+
+  ΓòöΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòù
+  Γòæ    FINAL TEST RESULTS                Γòæ
+  ΓòáΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòú
+  Γòæ  Accuracy:  0.8970                  Γòæ
+  Γòæ  F1 Score:  0.8967                  Γòæ
+  Γòæ  Precision: 0.8970                  Γòæ
+  Γòæ  Recall:    0.8964                  Γòæ
+  ΓòÜΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓò¥
+
+              precision    recall  f1-score   support
+
+       Human     0.8971    0.8845    0.8908     16272
+     Machine     0.8969    0.9083    0.9026     18000
+
+    accuracy                         0.8970     34272
+   macro avg     0.8970    0.8964    0.8967     34272
+weighted avg     0.8970    0.8970    0.8970     34272
+
+
+≡ƒÆ╛ Phase 5: Saving outputs to fusion_output_3branch_v2/...
+  ≡ƒôè Saved training_curves.png
+  ≡ƒôè Saved gate_values.png
+  ≡ƒôè Saved lr_schedule.png
+  ≡ƒôè Saved confusion_matrix.png
+  ≡ƒÆ╛ Saved training_history.json
+  ≡ƒÆ╛ Saved test_predictions.json
+  ≡ƒÆ╛ Saved scalers.pkl
+  ≡ƒÆ╛ Saved config.json
+
+============================================================
+  Γ£à TRAINING COMPLETE!
+  ≡ƒôü All outputs saved to: fusion_output_3branch_v2/
+============================================================
+

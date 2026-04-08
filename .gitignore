@@ -1,0 +1,13 @@
+# Python environments
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# Large dataset files and embeddings (ignored to prevent GitHub 100MB limit failure)
+data/features/*.pkl
+data/raw/*.jsonl
+*.pt
+
+# Git/OS specific
+.DS_Store

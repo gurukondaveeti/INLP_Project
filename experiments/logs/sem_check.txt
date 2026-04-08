@@ -1,0 +1,6 @@
+﻿semantic_train.pkl: 119757 entries, key_type=str, vec_dim=64, label=0
+semantic_validation.pkl: 5000 entries, key_type=str, vec_dim=64, label=0
+semantic_test.pkl: 34272 entries, key_type=str, vec_dim=64, label=1
+embeddings_train.pkl: 119757 entries, key_type=str, vec_dim=768, label=0
+embeddings_validation.pkl: 5000 entries, key_type=str, vec_dim=768, label=0
+embeddings_test.pkl: 34272 entries, key_type=str, vec_dim=768, label=1

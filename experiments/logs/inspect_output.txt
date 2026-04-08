@@ -1,0 +1,75 @@
+﻿============================================================
+AFZAL: extracted_features_cache.pkl
+============================================================
+  train_features: DataFrame, shape=(119757, 11)
+    columns: ['burstiness', 'sentence_length_deviation', 'dependency_tree_depth', 'hapax_legomena_ratio', 'clause_density', 'verb_gap_deviation', 'lexical_density', 'stopword_gradient', 'content_unique_ratio', 'subject_verb_distance', 'function_word_adjacency']
+    dtypes: [dtype('float64')]
+    sample row 0: [1.66091354 9.09754008 3.52631579 0.26329114 1.84210526]...
+    any NaN: False
+  val_features: DataFrame, shape=(5000, 11)
+    columns: ['burstiness', 'sentence_length_deviation', 'dependency_tree_depth', 'hapax_legomena_ratio', 'clause_density', 'verb_gap_deviation', 'lexical_density', 'stopword_gradient', 'content_unique_ratio', 'subject_verb_distance', 'function_word_adjacency']
+    dtypes: [dtype('float64')]
+    sample row 0: [0.         7.48331477 5.33333333 0.72222222 4.11111111]...
+    any NaN: False
+  test_features: DataFrame, shape=(34272, 11)
+    columns: ['burstiness', 'sentence_length_deviation', 'dependency_tree_depth', 'hapax_legomena_ratio', 'clause_density', 'verb_gap_deviation', 'lexical_density', 'stopword_gradient', 'content_unique_ratio', 'subject_verb_distance', 'function_word_adjacency']
+    dtypes: [dtype('float64')]
+    sample row 0: [0.91230603 5.58073839 5.         0.32317073 2.51612903]...
+    any NaN: False
+  y_train: ndarray, shape=(119757,), dtype=int64
+    unique: [0 1]
+  y_val: ndarray, shape=(5000,), dtype=int64
+    unique: [0 1]
+  y_test: ndarray, shape=(34272,), dtype=int64
+    unique: [0 1]
+
+============================================================
+VINAY Perplexity: train_perplexity_features.pkl (TRAIN)
+============================================================
+  type: dict, num_entries: 119757
+  key type: int
+  key range: min=0, max=119756
+  entry type: dict
+    'vector': shape=(12,), dtype=float32, sample=[-2.1757812  2.3496094  2.5800781  1.6542969]
+    'label': value=1, type=int
+  vector dims seen (first 100): {12}
+  missing 'vector' (first 100): 0
+  missing 'label' (first 100): 0
+
+============================================================
+VINAY Perplexity: dev_perplexity_features.pkl (DEV/VAL)
+============================================================
+  type: dict, num_entries: 5000
+  key type: int
+  key range: min=0, max=4999
+  entry type: dict
+    'vector': shape=(12,), dtype=float32, sample=[-3.1269531  2.5722656  3.1132812  1.5107422]
+    'label': value=1, type=int
+  vector dims seen (first 100): {12}
+  missing 'vector' (first 100): 0
+  missing 'label' (first 100): 0
+
+============================================================
+VINAY Perplexity: test_perplexity_features.pkl (TEST)
+============================================================
+  type: dict, num_entries: 34272
+  key type: int
+  key range: min=0, max=34271
+  entry type: dict
+    'vector': shape=(12,), dtype=float32, sample=[-3.1132812  2.5625     3.0527344  1.3759766]
+    'label': value=0, type=int
+  vector dims seen (first 100): {12}
+  missing 'vector' (first 100): 0
+  missing 'label' (first 100): 0
+
+============================================================
+SUMMARY
+============================================================
+Stylo train: 119757 samples
+Stylo val:   5000 samples
+Stylo test:  34272 samples
+Perplexity train: 119757 samples
+Perplexity val:   5000 samples
+Perplexity test:  34272 samples
+
+Label consistency (first 100 train): MATCH

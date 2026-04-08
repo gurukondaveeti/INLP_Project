@@ -1,0 +1,44 @@
+# Context for the LLM
+
+You are an expert Machine Learning assistant helping to build a fused architecture for Machine-Generated Text (MGT) Detection (SemEval-2024 Task 8).
+
+We are collaborating with a partner who has already extracted mathematically-driven "Perplexity features" using GPT-2. We have our own set of "Stylometric features" stored separately. Our goal right now is to load our partner's pre-extracted Perplexity features, load our own Stylometric features, combine them (Early Fusion), and train a Multi-Layer Perceptron (MLP) on the combined dataset.
+
+## Detailed Data Structure of the Partner's Provided Pickle Files
+
+Our partner has provided us with three `.pkl` files:
+1. `train_perplexity_features.pkl`
+2. `dev_perplexity_features.pkl`
+3. `test_perplexity_features.pkl`
+
+These files contain **12-Dimensional logic/probability fingerprints** extracted from the raw text.
+
+**The structure of inside each pickle file is exactly a nested dictionary keyed by the line `id`:**
+```python
+{
+   id_0: {
+       "vector": array([ 1.02, -0.45, 0.0, ... 12 values total ... ]),
+       "label": 1
+   },
+   id_1: {
+       "vector": array([ -0.12, 0.6, 0.05, ... 12 values total ... ]),
+       "label": 0
+   },
+   # ... spans the entire dataset (e.g., N=119,757 for training)
+}
+```
+*(Labels: `0` = Human-written, `1` = Machine-generated)*
+
+**Crucial detail to remember:** The `id` keys directly map to the original row index of the `.jsonl` dataset texts. 
+
+## Architectural & Implementation Goals
+
+Please write the Python code to accomplish the following:
+
+1. **Load & Align:** Load our stylometric features and the partner's `.pkl` files. Ensure they are aligned correctly using the `id` keys so we do not accidentally mix up the features for different texts.
+2. **Per-Branch Normalization (Critical):** The perplexity features (log probabilities) and our stylometric features represent totally different scales. You MUST fit a separate `StandardScaler()` on the perplexity vectors and a separate `StandardScaler()` on the stylometric vectors using *only* the training data. Then apply these transformations to the train, dev, and test sets independently before merging.
+3. **Feature Concatenation:** Concatenate the two normalized vectors into a single 1D flat array per text: `[12_perp_features + M_stylo_features]`.
+4. **Build an MLP Classifier (PyTorch):** Design a Multi-Layer Perceptron that accepts the combined feature size as input. Include Dropout and LayerNorm to prevent overfitting, as the feature types are highly heterogeneous.
+5. **Training Loop:** Write a standard PyTorch training loop that optimizes using AdamW, trains on the fused train set, evaluates on the dev set, saves the best model based on validation loss, and eventually predicts on the test set.
+
+Proceed to generate the robust training script based on this exact pipeline specification.
