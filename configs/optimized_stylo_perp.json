@@ -1,0 +1,22 @@
+{
+    "lr": 0.0011360171605954274,
+    "weight_decay": 1.9676745427004847e-05,
+    "batch_size": 1024,
+    "label_smoothing": 0.05,
+    "perp_dropout": 0.19439994360231477,
+    "perp_grad_scale": 0.06577457403954433,
+    "perp_gate_init": 0.28387065463179934,
+    "branch_proj_dim": 16,
+    "hidden_dims": [
+        256,
+        128
+    ],
+    "dropout_rates": [
+        0.4,
+        0.2
+    ],
+    "epochs": 75,
+    "patience": 15,
+    "scheduler": "onecycle",
+    "output_dir": "experiments/final_optimized_model"
+}

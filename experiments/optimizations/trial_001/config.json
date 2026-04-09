@@ -1,0 +1,40 @@
+{
+  "stylo_pkl": "data/features/extracted_features_cache.pkl",
+  "train_perp": "data/features/train_perplexity_features.pkl",
+  "val_perp": "data/features/dev_perplexity_features.pkl",
+  "test_perp": "data/features/test_perplexity_features.pkl",
+  "semantic_dir": "data/features",
+  "stylo_dim": 11,
+  "perp_dim": 12,
+  "sem_dim": 64,
+  "hidden_dims": [
+    128,
+    64,
+    32
+  ],
+  "dropout_rates": [
+    0.3,
+    0.2,
+    0.1
+  ],
+  "branch_proj_dim": 48,
+  "no_branch_proj": false,
+  "perp_dropout": 0.30310419751488404,
+  "perp_grad_scale": 0.23509053627140392,
+  "perp_gate_init": 0.14766060291057942,
+  "primary_loss_weight": 0.7,
+  "label_smoothing": 0.05,
+  "disable_stylo": false,
+  "disable_perp": false,
+  "disable_sem": true,
+  "epochs": 25,
+  "batch_size": 256,
+  "lr": 0.0001576542871461024,
+  "weight_decay": 1.3944874828760122e-05,
+  "patience": 6,
+  "scheduler": "onecycle",
+  "num_workers": 0,
+  "seed": 42,
+  "output_dir": "experiments\\optimizations\\trial_001",
+  "config": null
+}

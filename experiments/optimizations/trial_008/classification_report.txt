@@ -1,0 +1,15 @@
+SemEval-2024 Task 8A — MGT Detection — Fusion Model
+Generated: 2026-04-09 12:03:41
+Best epoch: 13  |  Best Val F1: 0.7482
+============================================================
+
+              precision    recall  f1-score   support
+
+       Human     0.8993    0.9505    0.9242     16272
+     Machine     0.9528    0.9038    0.9276     18000
+
+    accuracy                         0.9259     34272
+   macro avg     0.9260    0.9271    0.9259     34272
+weighted avg     0.9274    0.9259    0.9260     34272
+
+Gate values at best epoch: {'gate_stylo': 0.33029159903526306, 'gate_perp': 0.42107123136520386, 'gate_sem': 0.5}
