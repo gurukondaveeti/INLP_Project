@@ -84,6 +84,11 @@ def parse_args():
                    help="Weight of primary loss vs auxiliary loss")
     p.add_argument("--label_smoothing", type=float, default=0.05)
 
+    # ── Ablation Mode Toggles ──────────────────────────────────
+    p.add_argument("--disable_stylo", action="store_true", help="Disable stylo branch")
+    p.add_argument("--disable_perp", action="store_true", help="Disable perp branch")
+    p.add_argument("--disable_sem", action="store_true", help="Disable sem branch")
+
     # ── Training Hyperparameters ───────────────────────────────
     p.add_argument("--epochs", type=int, default=30)
     p.add_argument("--batch_size", type=int, default=512)
@@ -109,7 +114,7 @@ def parse_args():
     
     if args.config:
         try:
-            with open(args.config, 'r') as f:
+            with open(args.config, 'r', encoding="utf-8") as f:
                 config_dict = json.load(f)
             # Set JSON contents as standard defaults allowing CLI overrides
             p.set_defaults(**config_dict)
@@ -117,7 +122,7 @@ def parse_args():
             print(f"Error loading config file {args.config}: {e}")
             
     # Final parse to incorporate CLI args over config defaults
-    return p.parse_args(remaining)
+    return p.parse_args()
 
 
 # ══════════════════════════════════════════════════════════════
@@ -130,6 +135,9 @@ def train_one_epoch(
     optimizer: torch.optim.Optimizer,
     scheduler,
     device: torch.device,
+    use_stylo: bool = True,
+    use_perp: bool = True,
+    use_sem: bool = True,
 ) -> dict:
     model.train()
     total_loss = 0.0
@@ -145,7 +153,7 @@ def train_one_epoch(
         labels = labels.to(device)
 
         optimizer.zero_grad()
-        primary_logits, aux_logits = model(stylo, perp, sem)
+        primary_logits, aux_logits = model(stylo, perp, sem, use_stylo, use_perp, use_sem)
         loss, loss_p, loss_a = criterion(primary_logits, aux_logits, labels)
         loss.backward()
 
@@ -185,6 +193,9 @@ def evaluate(
     loader: DataLoader,
     criterion: FusionLoss,
     device: torch.device,
+    use_stylo: bool = True,
+    use_perp: bool = True,
+    use_sem: bool = True,
 ) -> dict:
     model.eval()
     total_loss = 0.0
@@ -200,7 +211,7 @@ def evaluate(
         sem = sem.to(device)
         labels = labels.to(device)
 
-        primary_logits, aux_logits = model(stylo, perp, sem)
+        primary_logits, aux_logits = model(stylo, perp, sem, use_stylo, use_perp, use_sem)
         loss, loss_p, loss_a = criterion(primary_logits, aux_logits, labels)
 
         total_loss += loss.item() * labels.size(0)
@@ -511,12 +522,19 @@ def main():
             model, train_loader, criterion, optimizer,
             scheduler if args.scheduler == "onecycle" else None,
             device,
+            use_stylo=not args.disable_stylo,
+            use_perp=not args.disable_perp,
+            use_sem=not args.disable_sem,
         )
         if args.scheduler == "cosine":
             scheduler.step()
 
         # Validate
-        val_metrics = evaluate(model, val_loader, criterion, device)
+        val_metrics = evaluate(model, val_loader, criterion, device,
+            use_stylo=not args.disable_stylo,
+            use_perp=not args.disable_perp,
+            use_sem=not args.disable_sem,
+        )
 
         # Gate values
         gates = model.get_gate_values()
@@ -591,7 +609,11 @@ def main():
                        map_location=device, weights_only=False)
     model.load_state_dict(ckpt["model_state_dict"])
 
-    test_metrics = evaluate(model, test_loader, criterion, device)
+    test_metrics = evaluate(model, test_loader, criterion, device,
+        use_stylo=not args.disable_stylo,
+        use_perp=not args.disable_perp,
+        use_sem=not args.disable_sem,
+    )
 
     print(f"\n  ╔══════════════════════════════════════╗")
     print(f"  ║    FINAL TEST RESULTS                ║")
@@ -610,7 +632,7 @@ def main():
     print(f"\n{report}")
 
     # Save classification report
-    with open(os.path.join(args.output_dir, "classification_report.txt"), "w") as f:
+    with open(os.path.join(args.output_dir, "classification_report.txt"), "w", encoding="utf-8") as f:
         f.write(f"SemEval-2024 Task 8A — MGT Detection — Fusion Model\n")
         f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         f.write(f"Best epoch: {best_epoch}  |  Best Val F1: {best_val_f1:.4f}\n")

@@ -35,6 +35,6 @@
   "scheduler": "onecycle",
   "num_workers": 0,
   "seed": 42,
-  "output_dir": "experiments/fusion_output_3branch_v2",
-  "config": null
+  "output_dir": "experiments\\ablation_study\\All_Three",
+  "config": "configs/best_model.json"
 }

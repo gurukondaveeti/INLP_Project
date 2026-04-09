@@ -1,0 +1,17 @@
+Feature,Category,Importance_F1_Drop
+GPT2_Perplexity_Bin_4,Perplexity,0.31148737535268367
+verb_gap_deviation,Stylometric,0.48709967006475097
+GPT2_Perplexity_Bin_10,Perplexity,0.5394574174105173
+GPT2_Perplexity_Bin_12,Perplexity,0.7736059165164733
+GPT2_Perplexity_Bin_8,Perplexity,1.049845181579954
+sentence_length_deviation,Stylometric,1.536114615215368
+dependency_tree_depth,Stylometric,2.5633408676221023
+GPT2_Perplexity_Bin_6,Perplexity,2.7550905891179838
+function_word_adjacency,Stylometric,2.785471199707615
+GPT2_Perplexity_Bin_7,Perplexity,2.9288161943200777
+GPT2_Perplexity_Bin_3,Perplexity,3.6416980266116923
+GPT2_Perplexity_Bin_2,Perplexity,3.9822600825104075
+GPT2_Perplexity_Bin_1,Perplexity,6.058935588197244
+GPT2_Perplexity_Bin_5,Perplexity,8.522002010637209
+GPT2_Perplexity_Bin_9,Perplexity,9.739086207817863
+GPT2_Perplexity_Bin_11,Perplexity,11.682633261895703

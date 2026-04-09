@@ -1,0 +1,14 @@
+{
+  "d_model": 32,
+  "num_heads": 4,
+  "num_layers": 2,
+  "hidden_dim": 128,
+  "dropout": 0.25,
+  "lr": 0.0003,
+  "weight_decay": 0.001,
+  "epochs": 60,
+  "batch_size": 256,
+  "patience": 12,
+  "label_smoothing": 0.05,
+  "scheduler": "onecycle"
+}

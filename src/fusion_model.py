@@ -194,6 +194,9 @@ class FusionMLP(nn.Module):
         stylo: torch.Tensor,    # (B, stylo_dim)
         perp: torch.Tensor,     # (B, perp_dim)
         sem: torch.Tensor,      # (B, sem_dim)
+        use_stylo: bool = True, # Toggle branch
+        use_perp: bool = True,  # Toggle branch
+        use_sem: bool = True,   # Toggle branch
     ) -> Tuple[torch.Tensor, torch.Tensor]:
         """
         Returns
@@ -231,6 +234,14 @@ class FusionMLP(nn.Module):
         s_gated = s * g_s
         p_gated = p * g_p
         e_gated = e * g_e
+
+        # ABLATION INTERVENTION: Zero out disabled branches
+        if not use_stylo:
+            s_gated = torch.zeros_like(s_gated)
+        if not use_perp:
+            p_gated = torch.zeros_like(p_gated)
+        if not use_sem:
+            e_gated = torch.zeros_like(e_gated)
 
         # ── 6. Fusion → Primary Head ──────────────────────────
         fused = torch.cat([s_gated, p_gated, e_gated], dim=-1)

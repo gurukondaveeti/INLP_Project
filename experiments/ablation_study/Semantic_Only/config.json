@@ -24,8 +24,8 @@
   "perp_gate_init": 0.12,
   "primary_loss_weight": 0.7,
   "label_smoothing": 0.08,
-  "disable_stylo": false,
-  "disable_perp": false,
+  "disable_stylo": true,
+  "disable_perp": true,
   "disable_sem": false,
   "epochs": 50,
   "batch_size": 256,
@@ -35,6 +35,6 @@
   "scheduler": "onecycle",
   "num_workers": 0,
   "seed": 42,
-  "output_dir": "experiments/fusion_output_3branch_v2",
-  "config": null
+  "output_dir": "experiments\\ablation_study\\Semantic_Only",
+  "config": "configs/best_model.json"
 }

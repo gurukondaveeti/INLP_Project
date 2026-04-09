@@ -29,7 +29,12 @@ from typing import Optional, List, Tuple, Dict
 # Set to "ALL" to use all 11 features.
 # Example:  STYLO_FEATURES = ["dependency_tree_depth", "function_word_adjacency",
 #                              "sentence_length_deviation", "verb_gap_deviation"]
-STYLO_FEATURES = "ALL"
+STYLO_FEATURES = [
+    "dependency_tree_depth",
+    "function_word_adjacency",
+    "sentence_length_deviation",
+    "verb_gap_deviation"
+]
 # ───────────────────────────────────────────────────────────────
 
 

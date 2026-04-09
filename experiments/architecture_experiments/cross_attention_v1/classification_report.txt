@@ -1,0 +1,18 @@
+Cross-Attention Fusion — SemEval-2024 Task 8A — MGT Detection
+Generated: 2026-04-09 00:33:43
+Best epoch: 43  |  Best Val F1: 0.6809
+============================================================
+
+Accuracy:  0.7532
+F1 Score:  0.7490
+Precision: 0.7593
+Recall:    0.7486
+
+              precision    recall  f1-score   support
+
+       Human     0.7884    0.6564    0.7164     16272
+     Machine     0.7302    0.8407    0.7816     18000
+
+    accuracy                         0.7532     34272
+   macro avg     0.7593    0.7486    0.7490     34272
+weighted avg     0.7578    0.7532    0.7506     34272

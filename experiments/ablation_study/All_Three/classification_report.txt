@@ -1,5 +1,5 @@
-SemEval-2024 Task 8A — MGT Detection — Fusion Model
-Generated: 2026-04-08 16:04:01
+SemEval-2024 Task 8A â€” MGT Detection â€” Fusion Model
+Generated: 2026-04-08 17:06:19
 Best epoch: 19  |  Best Val F1: 0.7309
 ============================================================
 
